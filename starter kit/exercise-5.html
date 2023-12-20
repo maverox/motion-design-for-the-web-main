@@ -211,8 +211,13 @@
 			transition-property: all;
 			transition-delay: var(--def-transition-duration);
 		}
+		figure:nth-child(even):hover{
+			transform: translateY(-1rem) rotate(3deg);
+		}
+		figure:nth-child(odd):hover {
+			transform: translateY(-1rem) rotate(-3deg);
+		}
 		figure:hover {
-			transform: translateY(-1rem);
 			border-radius: 2rem;
 			box-shadow: 1rem 3rem 2rem rgba(0, 0, 0, 0.589);
 		}

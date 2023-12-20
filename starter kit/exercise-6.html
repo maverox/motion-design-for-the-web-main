@@ -251,6 +251,30 @@
 		/* In the video I'm using the following icons and imagery: */
 		/* - https://elements.envato.com/photo-realistic-weather-icon-set-K7MGJ3 */
 		/* - https://elements.envato.com/weather-icon-pack-3UHW3R3 */
+		.accordion--item {
+			transition-property: background-size, flex-basis, padding;
+
+		}
+		.accordion--item:hover:not(.opened) {
+			background-size: 32rem;
+			padding-block: 4rem;
+		}
+		.accordion--item:hover:not(.opened) .bottom-temp{
+			transform: translateY(-2rem) scale(0.8) scale(1);
+			transition-property: transform;
+		}
+		
+
+
+
+
+
+
+		.accordion--item, .accordion--item:hover:not(.opened), .accordion--item:hover:not(.opened) .bottom-temp {
+			transition-duration: var(--def-transition-duration);
+			transition-timing-function: ease-in-out;
+		}
+		
 	</style>
 </head>
 <body>

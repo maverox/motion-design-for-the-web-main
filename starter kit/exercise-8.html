@@ -220,10 +220,61 @@
 		}
 
 		/* Air */
+		.loader-container {
+			position:fixed;
+			inset: 0;
+			background-color: #484040;
+			z-index: 9999;
+			display: grid;
+			place-content: center;
+			transition: all 0.5s ease-in-out;
+		}
+		.loader{
+			width: 5rem;
+			height: 5rem;
+			border-radius: 50%;
+			border: 0.5rem solid #ff2323;
+			border-color: #ff2323 transparent #ff2323 transparent;
+			animation:  0.7s ease-in-out infinite alternate rotate;
+		}
+		.loader-container.hide{
+			opacity: 0;
+			visibility: hidden;
+			transform: skew(20deg, 20deg) translate3d(0, -3rem, 0);
+		}
+		#page-content{
+			opacity: 0;
+			visibility: hidden;
+			transform: translate3d(0, -3rem, 0);
+			transition: all 0.3s ease-in-out;
+		}
+		.loader-container.hide .loader{
+			scale: 0;
+		}
+		#page-content.show{
+			opacity: 1;
+			visibility: visible;
+			transform: translate3d(0, 0rem, 0);
+			
+		}
+		@keyframes rotate {
+			0% {
+				transform: rotate(0deg) scale(1);
+			}
+			50% {
+				transform: rotate(180deg) scale(1.2);
+			}
+			100% {
+				transform: rotate(360deg) scale(1);
+			}
+		}
 	</style>
 </head>
 <body>
 	<!-- Air -->
+	<div class="loader-container">
+		<div class="loader"></div>
+	</div>
 	<!-- End Air -->
 
 	<section id="page-content">
@@ -365,6 +416,12 @@
 
 	<script>
 		// Air
+		const loader = document.querySelector('.loader-container');
+		const pageContent = document.querySelector('#page-content');
+		window.addEventListener('load', () => {
+			loader.classList.add('hide');
+			pageContent.classList.add('show');
+		});
 	</script>
 </body>
 </html>
