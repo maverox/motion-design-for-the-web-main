@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,7 +71,7 @@
 		}
 
 		h1 {
-			font-size: 4.875rem;
+			font-size: 4rem;
 			font-weight: 700;
 			max-width: 80%;
 			line-height: 1.2;
@@ -89,8 +90,15 @@
 			object-fit: cover;
 			z-index: -2;
 		}
+		#mouse {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 1;
+		}
 	</style>
 </head>
+
 <body>
 	<section id="hero">
 		<div class="container">
@@ -115,7 +123,25 @@
 			<h1>Crafting <span>digital masterpieces</span> with pixel-perfect precision.</h1>
 
 			<!-- Air -->
+			<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module">
+			</script>
+
+			<dotlottie-player src="https://lottie.host/ad29631b-4bbd-4cae-894f-24856149c935/glikb1CRmp.json"
+				background="transparent" speed="2" style="width: 8rem; height: 8rem;" id="mouse" autoplay>
+			</dotlottie-player>
+			<script>
+				const mouse = document.getElementById('mouse');
+				window.addEventListener('mousemove', (e) => {
+					mouse.style.transformOrigin = 'center center';
+					mouse.style.transform = 'translate3d(-50%, -50%, 0) scale(0.5)';
+					mouse.style.cursor = 'none';
+					mouse.style.top = e.clientY + 'px' ;
+					mouse.style.left = e.clientX + 'px';
+					// console.log(e.target.style, e.sourceElement);
+				});
+			</script>
 		</div>
 	</section>
 </body>
+
 </html>

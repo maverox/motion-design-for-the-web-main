@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,8 @@
 	<!-- Google Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;700&family=Poppins:wght@700&display=swap"
+		rel="stylesheet">
 
 	<style>
 		:root {
@@ -32,6 +34,11 @@
 		body {
 			background-color: var(--gray);
 			font-size: 1.125rem;
+			overflow-x: hidden;
+		}
+
+		body::-webkit-scrollbar {
+			display: none;
 		}
 
 		p {
@@ -186,7 +193,7 @@
 			gap: 2rem;
 		}
 
-		.btn + .social-links {
+		.btn+.social-links {
 			margin-top: 8rem;
 		}
 
@@ -226,8 +233,31 @@
 		}
 
 		/* Air */
+
+
+		/* lenis css */
+		html.lenis {
+			height: auto;
+		}
+
+		.lenis.lenis-smooth {
+			scroll-behavior: auto;
+		}
+
+		.lenis.lenis-smooth [data-lenis-prevent] {
+			overscroll-behavior: contain;
+		}
+
+		.lenis.lenis-stopped {
+			overflow: hidden;
+		}
+
+		.lenis.lenis-scrolling iframe {
+			pointer-events: none;
+		}
 	</style>
 </head>
+
 <body>
 	<section id="hero">
 		<header>
@@ -255,8 +285,9 @@
 		</div>
 
 		<svg width="40" height="56" viewBox="0 0 40 56" fill="none" id="scroll-icon">
-			<rect x="0.5" y="0.5" width="39" height="55" rx="19.5" stroke="white"/>
-			<path d="M20 37V19M24 33L20 37L24 33ZM20 37L16 33L20 37Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+			<rect x="0.5" y="0.5" width="39" height="55" rx="19.5" stroke="white" />
+			<path d="M20 37V19M24 33L20 37L24 33ZM20 37L16 33L20 37Z" stroke="white" stroke-width="2"
+				stroke-linecap="round" stroke-linejoin="round" />
 		</svg>
 	</section>
 
@@ -298,7 +329,8 @@
 			<button class="btn">
 				Tell me about your project
 				<svg width="25" height="24" viewBox="0 0 25 24" fill="none">
-					<path d="M21.5 12H3.5M17.5 8L21.5 12L17.5 8ZM21.5 12L17.5 16L21.5 12Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M21.5 12H3.5M17.5 8L21.5 12L17.5 8ZM21.5 12L17.5 16L21.5 12Z" stroke="white"
+						stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 				</svg>
 			</button>
 			<ul class="social-links">
@@ -316,8 +348,120 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+
 	<script>
 		// Air
+		const entries = document.querySelectorAll('.entry');
+		entries.forEach(entry => {
+			let media = entry.querySelector('.entry__media');
+			let meta = entry.querySelector('.entry__meta');
+			// console.log(ScrollTrigger)
+			// gsap.set(media, {
+			// 	xPercent: 100,
+			// 	opacity: 0
+			// })
+			// gsap.set(meta, {
+			// 	xPercent: -100,
+			// 	opacity: 0
+			// })
+
+			// gsap.to(meta, {
+			// 	scrollTrigger: {
+			// 		trigger: entry,
+			// 		start: 'top center',
+			// 		end: 'bottom center',
+			// 		markers: true,
+			// 		scrub: true,
+			// 	},
+			// 	xPercent: 0,
+			// 	opacity: 1
+			// })
+			// gsap.to(media, {
+			// 	scrollTrigger: {
+			// 		trigger: entry,
+			// 		start: 'top center',
+			// 		end: 'bottom center',
+			// 		markers: true,
+			// 		scrub: true,
+			// 	},
+			// 	xPercent: 0,
+			// 	opacity: 1
+			// })
+			let tl = gsap.timeline({
+				scrollTrigger: {
+					trigger: entry,
+					start: 'top bottom',
+					end: 'bottom 90%',
+					// markers: true,
+					scrub: true,
+				}
+
+			})
+			tl.fromTo(media, {
+				xPercent: 100,
+				opacity: 0
+			}, {
+				xPercent: 0,
+				opacity: 1
+			})
+			tl.fromTo(meta, {
+				xPercent: -100,
+				opacity: 0
+			}, {
+				xPercent: 0,
+				opacity: 1
+			}, '<')
+		})
+
+		//my own styles
+		const hero = document.querySelector('#hero')
+		const heroContent = document.querySelector('.hero__content')
+		const scrollIcon = document.querySelector('#scroll-icon')
+		let tl2 = gsap.timeline({
+			scrollTrigger: {
+				trigger: hero,
+				start: 'top 0',
+				end: 'bottom -10%',
+				markers: true,
+				scrub: true,
+			}
+
+		})
+		tl2.fromTo(heroContent, {
+			yPercent: 0,
+			opacity: 1,
+			scale: 1,
+			
+		}, {
+			yPercent: -100,
+			opacity: 0,
+			scale: 0,
+			ease: Power4.easeIn
+		}) 
+		tl2.fromTo(scrollIcon, {
+			yPercent: 0,
+			opacity: 1,
+			scale: 1,
+		
+		}, {
+			yPercent: -6000,
+			opacity:0,
+			scale: 100,
+			ease: Power4.easeIn
+		}, '<')
+
+
+		// Lenis
+		const lenis = new Lenis()
+
+		lenis.on('scroll', ScrollTrigger.update)
+
+		gsap.ticker.add((time) => {
+			lenis.raf(time * 1000)
+		})
+
+		gsap.ticker.lagSmoothing(0)
 	</script>
 </body>
+
 </html>

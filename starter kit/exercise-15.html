@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,17 +15,65 @@
 			width: 100%;
 			height: 100vh;
 			place-content: center;
-			background-color: #F6E9FE;
+			background-color: #5e5663;
 		}
 
 		/* Air */
+		svg{
+			overflow: visible;
+		}
 	</style>
 </head>
+
 <body>
 	<div class="container">
 		<!-- Air -->
+		<svg width="274" height="171" viewBox="0 0 274 171" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path id="left"
+				d="M172.122 122.121C172.089 134.851 177.377 147.074 186.823 156.101C196.27 165.128 209.102 170.219 222.495 170.255C235.888 170.29 248.747 165.267 258.241 156.29C267.735 147.314 273.088 135.119 273.122 122.388L259.875 122.353C259.85 131.744 255.901 140.74 248.898 147.362C241.894 153.984 232.408 157.689 222.528 157.663C212.648 157.637 203.183 153.882 196.214 147.223C189.245 140.564 185.344 131.547 185.369 122.156L172.122 122.121Z"
+				fill="black" />
+			<rect id="middle" x="179.016" y="162.139" width="85" height="152" rx="42.5"
+				transform="rotate(-179.848 179.016 162.139)" stroke="black" stroke-width="16" />
+
+			<path id="right"
+				d="M101.823 49.9372C101.987 37.2078 96.8235 24.9314 87.4695 15.8086C78.1155 6.68576 65.3367 1.46381 51.9444 1.29152C38.5521 1.11923 25.6432 6.01071 16.0576 14.8899C6.472 23.7691 0.994867 35.9086 0.831105 48.6379L14.0771 48.8083C14.1979 39.4181 18.2382 30.463 25.3094 23.913C32.3805 17.363 41.9031 13.7546 51.7824 13.8817C61.6617 14.0088 71.0884 17.861 77.9886 24.5907C84.8889 31.3205 88.6976 40.3766 88.5768 49.7668L101.823 49.9372Z"
+				fill="black" />
+
+		</svg>
+
 	</div>
 
 	<!-- Air -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+	<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/DrawSVGPlugin3.min.js"></script>
+
+	<script>
+		gsap.set("#middle", {
+			scale: 0,
+			transformOrigin: "50% 50%",
+		})
+
+
+		let tl = gsap.timeline({
+			
+		}) 
+		tl.to('#middle', {
+			scale: 1,
+			duration: 1.2,
+			ease: "elastic.out",
+			rotation: 360,
+			repeat: -1,
+		})
+		tl.fromTo('#left', {
+			drawSVG: "100% 100%",
+		}, {
+			drawSVG: "0% 100%",
+			duration: 1.2,
+			ease: "power1.inOut",
+			repeat: -1,
+			yoyo: true,
+		}, 0)
+	</script>
 </body>
+
 </html>
